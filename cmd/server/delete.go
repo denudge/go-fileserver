@@ -51,10 +51,5 @@ func deleteFile(w http.ResponseWriter, r *http.Request) {
 
 	log.Printf("successfully handled delete for folder %q, file %q", folder, filename)
 	w.WriteHeader(200)
-	_, err = w.Write([]byte("file successfully deleted\n"))
-	if err != nil {
-		log.Printf("error: could not write delete response: %v", err)
-	}
-
-	return
+	_, _ = w.Write([]byte("file successfully deleted\n"))
 }

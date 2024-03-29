@@ -39,7 +39,6 @@ func main() {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /v1/fileserver/{folder}/{filename}", uploadFile)
 	mux.HandleFunc("DELETE /v1/fileserver/{folder}/{filename}", deleteFile)
-	mux.HandleFunc("POST /v1/fileserver/test", testUpload)
 
 	addr := fmt.Sprintf(":%d", port)
 	server := http.Server{
