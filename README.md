@@ -35,6 +35,7 @@ $ ./bin/client upload <folder> <filename> <local-file-path>
 Delete a file on the server by using the client:
 ```bash
 $ ./bin/client delete <folder> <filename>
+```
 
 ## Server Options
 
