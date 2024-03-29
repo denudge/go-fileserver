@@ -5,7 +5,8 @@ A simple streaming file server demonstration
 ## Scope
 
 This package contains an absolute simple streaming file server written in Golang.
-It can store files from clients to disk (if not already there), and delete (existing) files from disk again.
+It can upload files from clients to disk (if not already there), stream them back
+as well as delete (existing) files from disk again.
 
 It's purpose is first and foremost to demonstrate streaming some data.
 Second, the `client` package can be embedded into other Go programs, thus making it easy to store files
@@ -30,6 +31,11 @@ $ make
 Upload a file by using the client:
 ```bash
 $ ./bin/client upload <folder> <filename> <local-file-path>
+```
+
+Download a file by using the client:
+```bash
+$ ./bin/client download <folder> <filename> <local-file-path>
 ```
 
 Delete a file on the server by using the client:

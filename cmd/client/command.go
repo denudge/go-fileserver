@@ -1,6 +1,7 @@
 package main
 
 const (
-	CommandUpload = "upload"
-	CommandDelete = "delete"
+	CommandUpload   = "upload"
+	CommandDownload = "download"
+	CommandDelete   = "delete"
 )

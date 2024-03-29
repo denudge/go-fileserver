@@ -41,6 +41,20 @@ func main() {
 		}
 
 		fmt.Println("file successfully uploaded")
+	case CommandDownload:
+		if len(os.Args) < 5 {
+			fmt.Println("missing local file argument")
+			printUsage(progName)
+			os.Exit(1)
+		}
+
+		err := c.DownloadFile(folder, file, os.Args[4])
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		fmt.Println("file successfully downloaded")
 	case CommandDelete:
 		err := c.DeleteFile(folder, file)
 		if err != nil {

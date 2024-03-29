@@ -13,9 +13,6 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 	}
 
-	// handle the request
-	buffer := make([]byte, bufferSize)
-
 	folder := r.PathValue("folder")
 	filename := r.PathValue("filename")
 
@@ -64,6 +61,9 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 		_, _ = w.Write([]byte("Internal Server Error\n"))
 		return
 	}
+
+	// create buffer
+	buffer := make([]byte, bufferSize)
 
 	// write chunk by chunk to file
 	hasData := true

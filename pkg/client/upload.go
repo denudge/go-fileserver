@@ -27,7 +27,6 @@ func (c *Client) UploadFile(folder, filename, localFile string) error {
 	if errors.Is(err, os.ErrNotExist) {
 		return fmt.Errorf("error: could not open file %q", fullPath)
 	}
-
 	defer file.Close()
 
 	bufReader := bufio.NewReader(file)
