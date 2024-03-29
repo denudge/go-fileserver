@@ -7,3 +7,7 @@ build:
 run:
 	go run ./cmd/server
 
+.PHONY: lint
+lint:
+	golangci-lint run
+    
