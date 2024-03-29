@@ -9,5 +9,5 @@ var (
 	port       = 8080
 	rootDir    = "/tmp"
 	bufferSize = 8092
-	debug      bool
+	debug      = false
 )
