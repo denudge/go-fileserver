@@ -67,5 +67,4 @@ func DownloadFile(w http.ResponseWriter, r *http.Request) {
 	}
 
 	log.Printf("successfully handled download for folder %q, file %q", folder, filename)
-	w.WriteHeader(200)
 }
