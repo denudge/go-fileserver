@@ -4,11 +4,17 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"github.com/denudge/go-fileserver/pkg/fileserver"
 	"golang.org/x/sys/unix"
 	"log"
 	"net/http"
 	"os"
 	"time"
+)
+
+const (
+	timeout        = 10 * time.Second
+	maxHeaderBytes = 4096
 )
 
 func main() {
@@ -36,20 +42,22 @@ func main() {
 		return
 	}
 
+	urlFilePath := fileserver.FormatUrlPath("{folder}", "{filename}")
+
 	mux := http.NewServeMux()
-	mux.HandleFunc("POST /v1/fileserver/{folder}/{filename}", checkFolderAndFile(uploadFile))
-	mux.HandleFunc("DELETE /v1/fileserver/{folder}/{filename}", checkFolderAndFile(deleteFile))
-	mux.HandleFunc("GET /v1/fileserver/{folder}/{filename}", checkFolderAndFile(DownloadFile))
+	mux.HandleFunc(http.MethodPost+" "+urlFilePath, checkFolderAndFile(uploadFile))
+	mux.HandleFunc(http.MethodDelete+" "+urlFilePath, checkFolderAndFile(deleteFile))
+	mux.HandleFunc(http.MethodGet+" "+urlFilePath, checkFolderAndFile(downloadFile))
 
 	addr := fmt.Sprintf(":%d", port)
 	server := http.Server{
 		Addr:              addr,
 		Handler:           mux,
-		ReadTimeout:       10 * time.Second,
-		ReadHeaderTimeout: 10 * time.Second,
-		WriteTimeout:      10 * time.Second,
-		IdleTimeout:       10 * time.Second,
-		MaxHeaderBytes:    4096,
+		ReadTimeout:       timeout,
+		ReadHeaderTimeout: timeout,
+		WriteTimeout:      timeout,
+		IdleTimeout:       timeout,
+		MaxHeaderBytes:    maxHeaderBytes,
 	}
 
 	log.Printf("starting HTTP server on %s ...\n", addr)

@@ -1,4 +1,4 @@
-package client
+package fileserver
 
 import (
 	"bufio"
@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"net/url"
 	"os"
 	"path/filepath"
 )
@@ -29,15 +28,7 @@ func (c *Client) UploadFile(folder, filename, localFile string) error {
 	}
 	defer file.Close()
 
-	bufReader := bufio.NewReader(file)
-	path := fmt.Sprintf("/v1/fileserver/%s/%s", url.PathEscape(folder), url.PathEscape(filename))
-	req, err := http.NewRequest(http.MethodPost, ServerAddress+path, bufReader)
-	if err != nil {
-		return fmt.Errorf("could not call fileserver: %w", err)
-	}
-	req.Header.Set("User-Agent", "go-fileserver/1.0")
-
-	resp, err := c.client.Do(req)
+	resp, err := c.Do(http.MethodPost, folder, filename, bufio.NewReader(file))
 	if resp != nil {
 		defer resp.Body.Close()
 	}

@@ -3,13 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/denudge/go-fileserver/pkg/fileserver"
 	"os"
-
-	"github.com/denudge/go-fileserver/pkg/client"
 )
 
 func main() {
-	flag.StringVar(&client.ServerAddress, "server-address", "http://localhost:8080", "HTTP host to stream files to/from")
+	flag.StringVar(&fileserver.ServerAddress, "server-address", "http://localhost:8080", "HTTP host to stream files to/from")
 	flag.Parse()
 
 	// parse command
@@ -24,10 +23,10 @@ func main() {
 	folder := os.Args[2]
 	file := os.Args[3]
 
-	c := client.NewClient()
+	c := fileserver.NewClient()
 
 	switch command {
-	case CommandUpload:
+	case fileserver.CommandUpload:
 		if len(os.Args) < 5 {
 			fmt.Println("missing local file argument")
 			printUsage(progName)
@@ -41,7 +40,7 @@ func main() {
 		}
 
 		fmt.Println("file successfully uploaded")
-	case CommandDownload:
+	case fileserver.CommandDownload:
 		if len(os.Args) < 5 {
 			fmt.Println("missing local file argument")
 			printUsage(progName)
@@ -55,7 +54,7 @@ func main() {
 		}
 
 		fmt.Println("file successfully downloaded")
-	case CommandDelete:
+	case fileserver.CommandDelete:
 		err := c.DeleteFile(folder, file)
 		if err != nil {
 			fmt.Println(err)

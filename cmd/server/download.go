@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func DownloadFile(w http.ResponseWriter, r *http.Request) {
+func downloadFile(w http.ResponseWriter, r *http.Request) {
 	if r.Body != nil {
 		defer r.Body.Close()
 	}
