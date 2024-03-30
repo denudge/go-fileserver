@@ -4,12 +4,12 @@ A simple streaming file server demonstration
 
 ## Scope
 
-This package contains an absolute simple streaming file server written in Golang.
+This package contains an absolute simple file server written in Golang.
 It can upload files from clients to disk (if not already there), stream them back
 as well as delete (existing) files from disk again.
 
 It's purpose is first and foremost to demonstrate streaming some data.
-Second, the `client` package can be embedded into other Go programs, thus making it easy to store files
+Second, the `fileserver` client package can be embedded into other Go programs, thus making it easy to store files
 to a remote server, e.g. backup files on a regular basis or dump processed data.
 There's no authentication, though, so it's production usage is quite limited.
 
