@@ -26,7 +26,7 @@ func main() {
 	c := fileserver.NewClient()
 
 	switch command {
-	case fileserver.CommandUpload:
+	case CommandUpload:
 		if len(os.Args) < 5 {
 			fmt.Println("missing local file argument")
 			printUsage(progName)
@@ -40,7 +40,7 @@ func main() {
 		}
 
 		fmt.Println("file successfully uploaded")
-	case fileserver.CommandDownload:
+	case CommandDownload:
 		if len(os.Args) < 5 {
 			fmt.Println("missing local file argument")
 			printUsage(progName)
@@ -54,7 +54,7 @@ func main() {
 		}
 
 		fmt.Println("file successfully downloaded")
-	case fileserver.CommandDelete:
+	case CommandDelete:
 		err := c.DeleteFile(folder, file)
 		if err != nil {
 			fmt.Println(err)

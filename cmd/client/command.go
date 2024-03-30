@@ -1,4 +1,4 @@
-package fileserver
+package main
 
 const (
 	CommandUpload   = "upload"
