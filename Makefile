@@ -10,4 +10,7 @@ run:
 .PHONY: lint
 lint:
 	golangci-lint run
-    
+
+.PHONY: docker
+docker:
+	docker build -t github.com/denudge/go-fileserver:latest .
