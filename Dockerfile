@@ -5,7 +5,7 @@ WORKDIR /app
 COPY ./ /app
 RUN go mod download
 
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o ./bin/server ./cmd/server
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-w -s" -o ./bin/server ./cmd/server
 
 RUN mkdir /empty
 
